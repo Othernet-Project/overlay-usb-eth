@@ -1,0 +1,26 @@
+# For more information about this file, see:
+# 
+#    http://www.unix.com/man-page/Linux/5/interfaces/
+#
+# This file is part of rxOS
+# GNU GPL version 3 or any later version.
+#
+# (c) 2016 Outernet Inc
+# Some rights reserved.
+
+auto lo wlan0 usb0
+
+iface lo inet loopback
+
+iface eth0 inet manual
+  post-up /usr/sbin/dhcpcfg $IFACE up
+  pre-down /usr/sbin/dhcpcfg $IFACE down
+
+iface usb0 inet static
+  address 10.10.10.10
+  netmask 255.255.255.0
+  gateway 10.10.10.100 
+
+iface wlan0 inet manual
+  post-up /usr/sbin/wlanclient $IFACE up
+  pre-down /usr/sbin/wlanclient $IFACE down
