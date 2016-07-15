@@ -21,6 +21,8 @@ iface usb0 inet static
   netmask 255.255.255.0
   gateway 10.10.10.100 
 
-iface wlan0 inet manual
-  post-up /usr/sbin/wlanclient $IFACE up
-  pre-down /usr/sbin/wlanclient $IFACE down
+allow-hotplug wlan0
+iface wlan0 inet static
+  address 10.0.0.1
+  netmask 255.255.255.0
+  dns-nameservers 10.0.0.1
