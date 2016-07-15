@@ -1,9 +1,14 @@
 .PHONY: all clean
 
-all: overlay-usb-eth.sqfs
+VERSION=1.0
+OVERLAY_NAME=usbeth
+OVERLAY_FILE=overlay-$(OVERLAY_NAME)-$(VERSION).sqfs
+SOURCE := overlay
+
+all: $(OVERLAY_FILE)
 
 clean:
 	-rm *.sqfs
 
-overlay-usb-eth.sqfs: overlay
+$(OVERLAY_FILE): $(SOURCE)
 	mksquashfs $< $@ -root-owned -comp lz4
